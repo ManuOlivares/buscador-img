@@ -1,0 +1,51 @@
+const resultado = document.querySelector('#resultado');
+const formulario = document.querySelector('#formulario');
+
+window.onload = () => {
+    formulario.addEventListener('submit', validarFormulario);
+}
+
+function validarFormulario(e){
+    e.preventDefault();
+    
+    const terminoBusqueda = document.querySelector('#termino').value; 
+
+    // Validación formulario vacío: Mostrar una Alerta para el usuario
+    if(terminoBusqueda === '') {
+        //console.log('Agrega un termino de búsqueda');
+        mostrarAlerta('Agrega un termino de búsqueda');
+        return;
+    }
+}
+
+// Función Alerta. 
+function mostrarAlerta(mensaje){
+
+    //Validando si existe la alerta para evitar duplicación 
+    const existeAlerta = document.querySelector('.bg-red-100');
+
+    if(!existeAlerta){
+        // Se crea un parrafo 'p' con estilos tailwins  (alerta.classlist.add(...))
+        const alerta = document.createElement('p');
+        alerta.classList.add('bg-red-100', 'border-red-400', 'text-red-700', 'px-4', 'py-3', 'rounded', 
+        'max-w-lg', 'mx-auto', 'mt-6', 'text-center');
+    
+        alerta.innerHTML = `
+            <strong class="font-bold">Error!</strong>
+            <span class="block sm:inline">${mensaje}</span>
+    
+        `; 
+    
+        // Se agrega la alerta al formulario
+        formulario.appendChild(alerta);
+    
+        //Mostrar alerta  por 3 segundos
+        setTimeout(() => {
+            alerta.remove();
+    
+        }, 3000);
+
+    }
+
+
+}
