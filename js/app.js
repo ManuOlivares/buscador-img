@@ -16,9 +16,12 @@ function validarFormulario(e){
         mostrarAlerta('Agrega un termino de búsqueda');
         return;
     }
+
+    buscarImagenes(terminoBusqueda);
+
 }
 
-// Función Alerta. 
+// Función Alerta 
 function mostrarAlerta(mensaje){
 
     //Validando si existe la alerta para evitar duplicación 
@@ -48,4 +51,22 @@ function mostrarAlerta(mensaje){
     }
 
 
+}
+
+// Consumo API de IMAGENES  PIXABAY https://pixabay.com/api/docs/
+function buscarImagenes(termino){
+    const key = '44529819-cd7cfbfe87af3268b595645f8';
+    const url = `https://pixabay.com/api/?key=${key}&q=${termino}`;
+
+    //console.log(url);
+    fetch(url)
+    .then(respuesta => respuesta.json())
+    .then(resultado => {
+        //console.log(resultado.hits)
+        mostrarImagenes(resultado.hits)
+    })
+}
+
+function mostrarImagenes(imagenes) {
+    console.log(imagenes);
 }
